@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTC Drug Safety Guide - Bharati Vidyapeeth</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Language Toggle */
+        .language-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: white;
+            border-radius: 50px;
+            padding: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            display: flex;
+            gap: 10px;
+        }
+
+        .lang-btn {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: transparent;
+            color: #667eea;
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .lang-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            z-index: 999;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .nav-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1e3c72;
+            margin-bottom: 15px;
+        }
+
+        .nav-item {
+            padding: 10px 15px;
+            margin: 5px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .nav-item:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        /* Content Container */
+        .content-container {
+            margin-left: 300px;
+            padding: 20px;
+        }
+
+        .page {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Cover Page */
+        .cover-page {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            text-align: center;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .university-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .booklet-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin: 2rem 0;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+        }
+
+        .cover-icon {
+            width: 150px;
+            height: 150px;
+            margin: 2rem auto;
+        }
+
+        /* Page Title */
+        .page-title {
+            font-size: 2.5rem;
+            color: #1e3c72;
+            margin-bottom: 2rem;
+            font-weight: 700;
+            text-align: center;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 1rem;
+        }
+
+        /* Content Image */
+        .content-image {
+            width: 100%;
+            max-width: 500px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin: 1.5rem auto;
+            display: block;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        /* Info Box */
+        .info-box {
+            background: linear-gradient(135deg, #f5f7ff 0%, #e8ebff 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 1.5rem 0;
+            border-left: 5px solid #667eea;
+        }
+
+        /* Bullet List */
+        .bullet-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .bullet-list li {
+            padding: 0.8rem 0 0.8rem 2.5rem;
+            position: relative;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .bullet-list li:before {
+            content: "●";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-size: 1.5rem;
+        }
+
+        /* Do's and Don'ts Grid */
+        .dos-donts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .dos-box {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 5px solid #28a745;
+        }
+
+        .donts-box {
+            background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 5px solid #dc3545;
+        }
+
+        .box-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .dos-box .box-title {
+            color: #155724;
+        }
+
+        .donts-box .box-title {
+            color: #721c24;
+        }
+
+        /* Side Effects Grid */
+        .side-effects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .side-effect-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid #667eea;
+            transition: all 0.3s;
+        }
+
+        .side-effect-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .serious-card {
+            border-left-color: #dc3545;
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%);
+        }
+
+        /* Reference List */
+        .reference-list {
+            background: #f8f9ff;
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .reference-item {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Acknowledgement Text */
+        .acknowledgement-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #333;
+            text-align: justify;
+            margin-bottom: 1.5rem;
+        }
+
+        .signature-section {
+            margin-top: 3rem;
+            text-align: right;
+            font-weight: 600;
+        }
+
+        /* Index Items */
+        .index-item {
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-left: 4px solid #667eea;
+            background: #f8f9ff;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .index-item:hover {
+            transform: translateX(10px);
+            background: #e8ebff;
+        }
+
+        /* Alert Box */
+        .alert-box {
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .alert-warning {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border-left: 5px solid #ffc107;
+            color: #856404;
+        }
+
+        .alert-danger {
+            background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+            border-left: 5px solid #dc3545;
+            color: #721c24;
+        }
+
+        /* Language Content Toggle */
+        .lang-content {
+            display: none;
+        }
+
+        .lang-content.active {
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .nav-container {
+                position: static;
+                margin-bottom: 20px;
+            }
+
+            .content-container {
+                margin-left: 0;
+            }
+
+            .dos-donts-grid,
+            .side-effects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .booklet-title {
+                font-size: 2rem;
+            }
+
+            .page {
+                padding: 1.5rem;
+            }
+
+            .language-toggle {
+                top: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Toggle -->
+    <div class="language-toggle">
+        <button class="lang-btn active" onclick="switchLanguage('en')">English</button>
+        <button class="lang-btn" onclick="switchLanguage('mr')">मराठी</button>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-container">
+        <div class="nav-title">Contents</div>
+        <div class="nav-item" onclick="scrollToSection('cover')">Cover</div>
+        <div class="nav-item" onclick="scrollToSection('acknowledgement')">Acknowledgement</div>
+        <div class="nav-item" onclick="scrollToSection('index')">Index</div>
+        <div class="nav-item" onclick="scrollToSection('what-are-otc')">What are OTC Drugs</div>
+        <div class="nav-item" onclick="scrollToSection('dos-donts')">Do's & Don'ts</div>
+        <div class="nav-item" onclick="scrollToSection('medical-help')">When to Seek Help</div>
+        <div class="nav-item" onclick="scrollToSection('common-effects')">Common Side Effects</div>
+        <div class="nav-item" onclick="scrollToSection('serious-effects')">Serious Side Effects</div>
+        <div class="nav-item" onclick="scrollToSection('references')">References</div>
+    </div>
+
+    <!-- Content Container -->
+    <div class="content-container">
+        
+        <!-- ENGLISH CONTENT -->
+        <div class="lang-content active" id="english-content">
+            
+            <!-- Cover Page -->
+            <div class="page cover-page" id="cover">
+                <div class="university-name">
+                    Bharati Vidyapeeth (Deemed to be University)<br>
+                    College of Nursing, Pune
+                </div>
+                <div class="cover-icon">
+                    <svg viewBox="0 0 200 200" fill="white" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="100" cy="100" r="80" fill="white" opacity="0.2"/>
+                        <path d="M100 40 L100 160 M40 100 L160 100" stroke="white" stroke-width="8" stroke-linecap="round"/>
+                        <circle cx="100" cy="100" r="30" fill="transparent" stroke="white" stroke-width="6"/>
+                    </svg>
+                </div>
+                <div class="booklet-title">
+                    INFORMATION BOOKLET ON<br>
+                    OVER-THE-COUNTER (OTC) DRUGS
+                </div>
+                <div class="subtitle">
+                    Your comprehensive guide to over-the-counter medication safety
+                </div>
+            </div>
+
+            <!-- Acknowledgement -->
+            <div class="page" id="acknowledgement">
+                <h1 class="page-title">ACKNOWLEDGEMENT</h1>
+                
+                <p class="acknowledgement-text">
+                    We would like to express our sincere gratitude to all those who have contributed to the development of this information booklet on Over-the-Counter (OTC) drugs. This educational resource has been prepared with the primary objective of promoting safe and responsible use of OTC medications among the general public.
+                </p>
+                
+                <p class="acknowledgement-text">
+                    We extend our heartfelt thanks to the faculty members of Bharati Vidyapeeth (Deemed to be University) College of Nursing, Pune, for their continuous support, guidance, and expertise in reviewing the content of this booklet. Their valuable insights have been instrumental in ensuring the accuracy and relevance of the information presented.
+                </p>
+                
+                <p class="acknowledgement-text">
+                    We are deeply grateful to all the research participants from selected areas of Pune city who voluntarily participated in our study. Their cooperation and willingness to share their experiences with OTC medications have provided valuable insights that shaped the content and approach of this educational material.
+                </p>
+                
+                <p class="acknowledgement-text">
+                    Special appreciation goes to the healthcare professionals and pharmacists who provided expert consultation during the development of this booklet, ensuring that the information is medically accurate, practical, and relevant to the community's needs.
+                </p>
+                
+                <div class="signature-section">
+                    <p>Research Team<br>
+                    Bharati Vidyapeeth College of Nursing<br>
+                    Pune, Maharashtra</p>
+                </div>
+            </div>
+
+            <!-- Index -->
+            <div class="page" id="index">
+                <h1 class="page-title">INDEX</h1>
+                <div class="index-item">1. What are OTC Drugs?</div>
+                <div class="index-item">2. Essential Do's and Don'ts</div>
+                <div class="index-item">3. When to Seek Medical Help</div>
+                <div class="index-item">4. Common Side Effects</div>
+                <div class="index-item">5. Serious Side Effects</div>
+                <div class="index-item">6. References</div>
+            </div>
+
+            <!-- What are OTC Drugs -->
+            <div class="page" id="what-are-otc">
+                <h1 class="page-title">What are Over-the-Counter (OTC) Drugs?</h1>
+                
+                <img src="https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=800&h=500&fit=crop" 
+                     alt="Medicine bottles" class="content-image">
+                
+                <div class="info-box">
+                    <p style="font-size: 1.2rem; margin-bottom: 1.5rem; font-weight: 600; color: #1e3c72;">
+                        Medicines you can buy without a doctor's prescription for minor health problems.
+                    </p>
+                    
+                    <ul class="bullet-list">
+                        <li><strong>Paracetamol</strong> — Fever and pain relief</li>
+                        <li><strong>Antacids</strong> — Acidity and heartburn</li>
+                        <li><strong>Cough Syrups</strong> — Cough and cold symptoms</li>
+                        <li><strong>ORS</strong> — Dehydration and electrolyte balance</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Do's and Don'ts -->
+            <div class="page" id="dos-donts">
+                <h1 class="page-title">Essential Do's & Don'ts</h1>
+                
+                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800&h=500&fit=crop" 
+                     alt="Healthcare consultation" class="content-image">
+                
+                <div class="dos-donts-grid">
+                    <div class="dos-box">
+                        <div class="box-title">✓ DO's</div>
+                        <ul class="bullet-list">
+                            <li>Read labels and dosage instructions carefully</li>
+                            <li>Use only for short-term symptom relief</li>
+                            <li>Store safely away from children's reach</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="donts-box">
+                        <div class="box-title">✗ DON'Ts</div>
+                        <ul class="bullet-list">
+                            <li>Don't exceed recommended dosages</li>
+                            <li>Don't mix with alcohol or other drugs</li>
+                            <li>Don't give adult medicines to children</li>
+                            <li>Don't self-medicate for serious conditions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- When to Seek Medical Help -->
+            <div class="page" id="medical-help">
+                <h1 class="page-title">When to Seek Medical Help</h1>
+                
+                <img src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=800&h=500&fit=crop" 
+                     alt="Doctor consultation" class="content-image">
+                
+                <div class="info-box">
+                    <ul class="bullet-list">
+                        <li>If symptoms persist beyond 3—5 days</li>
+                        <li>If you experience rashes, vomiting, or severe pain</li>
+                        <li>For chronic conditions (diabetes, hypertension, heart disease)</li>
+                    </ul>
+                </div>
+                
+                <div class="alert-box alert-warning">
+                    ⚠️ Remember: OTC drugs treat symptoms, not root causes.
+                </div>
+            </div>
+
+            <!-- Common Side Effects -->
+            <div class="page" id="common-effects">
+                <h1 class="page-title">Common Side Effects</h1>
+                
+                <div class="side-effects-grid">
+                    <div class="side-effect-card">
+                        <h3 style="color: #667eea;">1. Nausea</h3>
+                    </div>
+                    <div class="side-effect-card">
+                        <h3 style="color: #667eea;">2. Vomiting</h3>
+                    </div>
+                    <div class="side-effect-card">
+                        <h3 style="color: #667eea;">3. Acidity</h3>
+                    </div>
+                    <div class="side-effect-card">
+                        <h3 style="color: #667eea;">4. Constipation</h3>
+                    </div>
+                    <div class="side-effect-card">
+                        <h3 style="color: #667eea;">5. Ulcers</h3>
+                    </div>
+                    <div class="side-effect-card">
+                        <h3 style="color: #667eea;">6. Diarrhea</h3>
+                    </div>
+                    <div class="side-effect-card">
+                        <h3 style="color: #667eea;">7. Stomach Pain</h3>
+                    </div>
+                    <div class="side-effect-card">
+                        <h3 style="color: #667eea;">8. Headache</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Serious Side Effects -->
+            <div class="page" id="serious-effects">
+                <h1 class="page-title">Serious Side Effects</h1>
+                
+                <div class="side-effects-grid">
+                    <div class="side-effect-card serious-card">
+                        <h3 style="color: #dc3545;">1. Liver Damage</h3>
+                    </div>
+                    <div class="side-effect-card serious-card">
+                        <h3 style="color: #dc3545;">2. Kidney Damage</h3>
+                    </div>
+                    <div class="side-effect-card serious-card">
+                        <h3 style="color: #dc3545;">3. Allergic Reactions</h3>
+                    </div>
+                    <div class="side-effect-card serious-card">
+                        <h3 style="color: #dc3545;">4. Heart & BP Issues</h3>
+                    </div>
+                    <div class="side-effect-card serious-card">
+                        <h3 style="color: #dc3545;">5. Nervous System Effects</h3>
+                    </div>
+                </div>
+                
+                <div class="alert-box alert-danger">
+                    🚨 Seek immediate medical attention if you experience any serious side effects!
+                </div>
+            </div>
+
+            <!-- References -->
+            <div class="page" id="references">
+                <h1 class="page-title">References</h1>
+                
+                <div class="reference-list">
+                    <div class="reference-item">
+                        <strong>1.</strong> Choudhary V, et al. (2025). A review of self-medication practices in India. <em>Medical Journal Armed Forces India</em>.
+                    </div>
+                    
+                    <div class="reference-item">
+                        <strong>2.</strong> Mishra A, Nayak S. (2023). Risks of over-the-counter medication misuse in India. <em>Indian Journal of Public Health</em>.
+                    </div>
+                    
+                    <div class="reference-item">
+                        <strong>3.</strong> Bansal M, Jain K, Patel N. (2023). Knowledge gaps about OTC drugs in Pune: A community-based study.
+                    </div>
+                    
+                    <div class="reference-item">
+                        <strong>4.</strong> Rao S, Kumar A, Desai V. (2024). Digital interventions for safe medicine use in Maharashtra. <em>Journal of Community Medicine</em>.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- MARATHI CONTENT -->
+        <div class="lang-content" id="marathi-content">
+            
+            <!-- Cover Page -->
+            <div class="page cover-page">
+                <div class="university-name">
+                    भारती विद्यापीठ (डीम्ड टू बी युनिव्हर्सिटी)<br>
+                    कॉलेज ऑफ नर्सिंग, पुणे
+                </div>
+                <div class="cover-icon">
+                    <svg viewBox="0 0 200 200" fill="white" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="100" cy="100" r="80" fill="white" opacity="0.2"/>
+                        <path d="M100 40 L100 160 M40 100 L160 100" stroke="white" stroke-width="8" stroke-linecap="round"/>
+                        <circle cx="100" cy="100" r="30" fill="transparent" stroke="white" stroke-width="6"/>
+                    </svg>
+                </div>
+                <div class="booklet-title">
+                    ओव्हर-द-काउंटर (OTC) औषधांची<br>
+                    माहिती पुस्तिका
+                </div>
+                <div class="subtitle">
+                    प्रिस्क्रिप्शन नसलेल्या औषधांच्या सुरक्षित वापरासाठी तुमचे मार्गदर्शक
+                </div>
+            </div>
+
+            <!-- Acknowledgement -->
+            <div class="page">
+                <h1 class="page-title">आभार</h1>
+                
+                <p class="acknowledgement-text">
+                    ओव्हर-द-काउंटर (OTC) औषधांवरील या माहिती पुस्तिकेच्या निर्मितीमध्ये योगदान देणाऱ्या सर्वांचे आम्ही मनःपूर्वक आभार मानतो. ही शैक्षणिक साधन सामान्य जनतेमध्ये OTC औषधांचा सुरक्षित आणि जबाबदार वापर प्रोत्साहित करण्याच्या प्राथमिक उद्देशाने तयार करण्यात आली आहे.
+                </p>
+                
+                <p class="acknowledgement-text">
+                    भारती विद्यापीठ (डीम्ड टू बी युनिव्हर्सिटी) कॉलेज ऑफ नर्सिंग, पुणे येथील प्राध्यापकांचे त्यांच्या सतत समर्थन, मार्गदर्शन आणि या पुस्तिकेच्या सामग्रीच्या पुनरावलोकनातील तज्ञ ज्ञानाबद्दल आम्ही मनःपूर्वक धन्यवाद देतो.
+                </p>
+                
+                <p class="acknowledgement-text">
+                    पुणे शहरातील निवडक भागातील सर्व संशोधन सहभागींबद्दल आम्ही मनःपूर्वक कृतज्ञ आहोत ज्यांनी आमच्या अभ्यासात स्वेच्छेने सहभागी झाले. OTC औषधांबद्दलच्या त्यांच्या अनुभवांची माहिती देण्याची त्यांची इच्छा या शैक्षणिक साहित्याची रचना करण्यास मदत करते.
+                </p>
+                
+                <div class="signature-section">
+                    <p>संशोधन गट<br>
+                    भारती विद्यापीठ कॉलेज ऑफ नर्सिंग<br>
+                    पुणे, महाराष्ट्र</p>
+                </div>
+            </div>
+
+            <!-- Index -->
+            <div class="page">
+                <h1 class="page-title">अनुक्रमणिका</h1>
+                <div class="index-item">१. OTC औषधे काय आहेत?</div>
+                <div class="index-item">२. आवश्यक करावे आणि करू नये</div>
+                <div class="index-item">३. वैद्यकीय मदत कधी घ्यावी</div>
+                <div class="index-item">४. सामान्य दुष्परिणाम</div>
+                <div class="index-item">५. गंभीर दुष्परिणाम</div>
+                <div class="index-item">६. संदर्भ</div>
+            </div>
+
+            <!-- What are OTC Drugs -->
+            <div class="page">
+                <h1 class="page-title">ओव्हर-द-काउंटर (OTC) औषधे काय आहेत?</h1>
+                
+                <img src="https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=800&h=500&fit=crop" 
+                     alt="औषधांच्या बाटल्या" class="content-image">
+                
+                <div class="info-box">
+                    <p style="font-size: 1.2rem; margin-bottom: 1.5rem; font-weight: 600; color: #1e3c72;">
+                        लहान आरोग्य समस्यांसाठी डॉक्टरांच्या प्रिस्क्रिप्शनशिवाय खरेदी करू शकता अशी औषधे.
+                    </p>
+                    
+                    <ul class="bullet-list">
+                        <li><strong>पॅरासिटामॉल</strong> — ताप आणि वेदना कमी करण्यासाठी</li>
+                        <li><strong>अँटासिड्स</strong> — आम्लपित्त आणि छातीत जळजळ</li>
+                        <li><strong>खोकल्याचे सिरप</strong> — खोकला आणि सर्दीची लक्षणे</li>
+                        <li><strong>ORS</strong> — निर्जलीकरण आणि इलेक्ट्रोलाइट संतुलन</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Do's and Don'ts -->
+            <div class="page">
+                <h1 class="page-title">आवश्यक करावे आणि करू नये</h1>
+                
+                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800&h=500&fit=crop" 
+                     alt="आरोग्य सल्लामसलत" class="content-image">
+                
+                <div class="dos-donts-grid">
+                    <div class="dos-box">
+                        <div class="box-title">✓ करावे</div>
+                        <ul class="bullet-list">
+                            <li>लेबल आणि डोस सूचना काळजीपूर्वक वाचा</li>
+                            <li>फक्त अल्पकालीन लक्षण कमी करण्यासाठी वापरा</li>
+                            <li>मुलांपासून दूर सुरक्षितपणे ठेवा</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="donts-box">
+                        <div class="box-title">✗ करू नये</div>
+                        <ul class="bullet-list">
+                            <li>शिफारस केलेल्या डोसपेक्षा जास्त घेऊ नका</li>
+                            <li>दारू किंवा इतर औषधांसोबत मिसळू नका</li>
+                            <li>मुलांना प्रौढांची औषधे देऊ नका</li>
+                            <li>गंभीर परिस्थितींसाठी स्वतःहून औषधोपचार करू नका</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- When to Seek Medical Help -->
+            <div class="page">
+                <h1 class="page-title">वैद्यकीय मदत कधी घ्यावी</h1>
+                
+                <img src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=800&h=500&fit=crop" 
+                     alt="डॉक्टर सल्लामसलत" class="content-image">
+                
+                <div class="info-box">
+                    <ul class="bullet-list">
+                        <li>जर लक्षणे ३—५ दिवसांपेक्षा जास्त काळ टिकत असतील</li>
+                        <li>जर तुम्हाला पुरळ, उलट्या किंवा तीव्र वेदना जाणवत असतील</li>
+                        <li>दीर्घकालीन आजारांसाठी (मधुमेह, उच्च रक्तदाब, हृदयविकार)</li>
+                    </ul>
+                </div>
+                
+                <div class="alert-box alert-warning">
+                    ⚠️ लक्षात ठेवा: OTC औषधे फक्त लक्षणे कमी करतात, मूळ कारण दूर करत नाहीत.
+                </div>
+            </div>
+
+            <!-- Common Side Effects -->
+            <div class="page">
+                <h1 class="page-title">सामान्य दुष्परिणाम</h1>
+                
+                <div class="side-effects-grid">
+                    <div class="side-effect-card">
+                        <h3 style="color: #667eea;">१. मळमळ</h3>
+                    </div>
+                    <div class="side-effect-card">
+                        <h3 style="color: #667eea;">२. उलट्या</h3>
+                    </div>
+                    <div class="side-effect-card">
+                        <h3 style="color: #667eea;">३. आम्लपित्त</h3>
+                    </div>
+                    <div class="side-effect-card">
+                        <h3 style="color: #667eea;">४. बद्धकोष्ठता</h3>
+                    </div>
+                    <div class="side-effect-card">
+                        <h3 style="color: #667eea;">५. व्रण</h3>
+                    </div>
+                    <div class="side-effect-card">
+                        <h3 style="color: #667eea;">६. अतिसार</h3>
+                    </div>
+                    <div class="side-effect-card">
+                        <h3 style="color: #667eea;">७. पोटदुखी</h3>
+                    </div>
+                    <div class="side-effect-card">
+                        <h3 style="color: #667eea;">८. डोकेदुखी</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Serious Side Effects -->
+            <div class="page">
+                <h1 class="page-title">गंभीर दुष्परिणाम</h1>
+                
+                <div class="side-effects-grid">
+                    <div class="side-effect-card serious-card">
+                        <h3 style="color: #dc3545;">१. यकृताचे नुकसान</h3>
+                    </div>
+                    <div class="side-effect-card serious-card">
+                        <h3 style="color: #dc3545;">२. मूत्रपिंडाचे नुकसान</h3>
+                    </div>
+                    <div class="side-effect-card serious-card">
+                        <h3 style="color: #dc3545;">३. ऍलर्जिक प्रतिक्रिया</h3>
+                    </div>
+                    <div class="side-effect-card serious-card">
+                        <h3 style="color: #dc3545;">४. हृदय आणि रक्तदाबाच्या समस्या</h3>
+                    </div>
+                    <div class="side-effect-card serious-card">
+                        <h3 style="color: #dc3545;">५. मज्जासंस्थेवर परिणाम</h3>
+                    </div>
+                </div>
+                
+                <div class="alert-box alert-danger">
+                    🚨 कोणतेही गंभीर दुष्परिणाम जाणवल्यास ताबडतोब वैद्यकीय मदत घ्या!
+                </div>
+            </div>
+
+            <!-- References -->
+            <div class="page">
+                <h1 class="page-title">संदर्भ</h1>
+                
+                <div class="reference-list">
+                    <div class="reference-item">
+                        <strong>१.</strong> चौधरी व्ही, इत्यादी. (२०२५). भारतातील स्व-औषधोपचार पद्धतींचा आढावा. <em>मेडिकल जर्नल आर्म्ड फोर्सेस इंडिया</em>.
+                    </div>
+                    
+                    <div class="reference-item">
+                        <strong>२.</strong> मिश्रा अ, नायक स. (२०२३). भारतात ओव्हर-द-काउंटर औषधांच्या गैरवापराचे धोके. <em>इंडियन जर्नल ऑफ पब्लिक हेल्थ</em>.
+                    </div>
+                    
+                    <div class="reference-item">
+                        <strong>३.</strong> बन्सल म, जैन क, पटेल न. (२०२३). पुण्यातील OTC औषधांबद्दलची ज्ञान अंतर: एक समुदाय-आधारित अभ्यास.
+                    </div>
+                    
+                    <div class="reference-item">
+                        <strong>४.</strong> राव स, कुमार अ, देसाई व्ही. (२०२४). महाराष्ट्रात सुरक्षित औषध वापरासाठी डिजिटल हस्तक्षेप. <em>जर्नल ऑफ कम्युनिटी मेडिसिन</em>.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        function switchLanguage(lang) {
+            // Hide all content
+            document.getElementById('english-content').classList.remove('active');
+            document.getElementById('marathi-content').classList.remove('active');
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected content and activate button
+            if (lang === 'en') {
+                document.getElementById('english-content').classList.add('active');
+                document.querySelectorAll('.lang-btn')[0].classList.add('active');
+            } else {
+                document.getElementById('marathi-content').classList.add('active');
+                document.querySelectorAll('.lang-btn')[1].classList.add('active');
+            }
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+        
+        // Smooth scroll behavior
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add smooth scrolling to all links
+            const links = document.querySelectorAll('.nav-item');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
